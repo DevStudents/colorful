@@ -23,7 +23,7 @@ class Creation
 	 * 
 	 */
 	
-	const VERSION = '0.2.0-dev';
+	const VERSION = '0.2.0';
 
 	/**
 	 * Configured flag.

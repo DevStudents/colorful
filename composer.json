@@ -2,7 +2,7 @@
     "name": "sintloer/COLORFUL",
     "description": "COLORFULframework",
     "keywords": ["php"],
-    "version": "0.2.0-dev",
+    "version": "0.2.0",
     "type": "framework",
     "license": "MIT",
     "homepage": "https://github.com/sintloer/COLORFUL-framework",

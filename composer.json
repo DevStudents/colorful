@@ -1,0 +1,24 @@
+{
+    "name": "sintloer/COLORFUL",
+    "description": "COLORFULframework",
+    "keywords": ["php"],
+    "version": "0.2.0-dev",
+    "type": "framework",
+    "license": "MIT",
+    "homepage": "https://github.com/sintloer/COLORFUL-framework",
+    "authors": [
+        {
+            "name": "sintloer",
+            "email": "me@sintloer.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "sintloer\\COLORFUL\\": "src/"
+        }
+    },
+    "require": {
+        "php": ">=7.0.9",
+        "firebase/php-jwt": "^5.0"
+    }
+}

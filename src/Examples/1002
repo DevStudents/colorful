@@ -1,0 +1,15 @@
+...
+
+->config([
+
+	...
+
+<?php foreach($fields as $field): ?>
+	'<?= $field ?>' => ![<?= strtoupper($field) ?>],
+<?php endforeach; ?>
+
+	...
+
+])
+
+...

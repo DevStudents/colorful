@@ -1,0 +1,17 @@
+...
+
+->config([
+
+	...
+	
+	'views' => [
+		'directory' => ![Absolute path to views files],
+		'cacheDirectory' => ![Absolute path to save cache files],
+		'extension' => ![Extension of views files] | default: ".v"
+	]
+
+	...
+
+])
+
+...

@@ -1,0 +1,21 @@
+...
+
+->config([
+
+	...
+	
+	'databases' => [
+		![Connection name] => [
+			'type' => ![Database type],
+			'host' => ![Database host],
+			'user' => ![Database user],
+			'pass' => ![Database password],
+			'name' => ![Database name],
+			'prefix' => ![Table prefix]
+		]
+
+	...
+
+])
+
+...

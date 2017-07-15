@@ -1,0 +1,8 @@
+Options -Indexes +FollowSymLinks
+DirectoryIndex index.php
+
+RewriteEngine ON
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteRule ^(.*)$ index.php?ACTION=$1 [QSA]

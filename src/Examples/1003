@@ -1,0 +1,9 @@
+...
+
+-><?= strtolower($method) ?>(![PATH_TO_TEST], <b>function()</b> {
+	
+	...
+
+})
+
+...

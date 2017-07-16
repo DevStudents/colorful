@@ -5,7 +5,7 @@
 	...
 
 <?php foreach($fields as $field): ?>
-	'<?= $field ?>' => ![<?= strtoupper($field) ?>],
+	'<?php echo $field; ?>' => ![<?php echo strtoupper($field); ?>],
 <?php endforeach; ?>
 
 	...

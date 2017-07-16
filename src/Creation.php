@@ -10,7 +10,7 @@
 namespace sintloer\COLORFUL;
 
 /**
- * It's a "main" class of the COLORFULframework.
+ * Creation COLORFULframework class.
  * 
  */
 
@@ -35,14 +35,14 @@ class Creation
 
 	/**
 	 * Initialize autoload, set environment type and load basic components.
-	 * @param string $env
+	 * @param string $mode
 	 * @return void
 	 * 
 	 */
 	
-	public function __construct($env)
+	public function __construct($mode)
 	{
-		new Core\Initialize($env);
+		new Core\Initialize($mode);
 	}
 
 	/**

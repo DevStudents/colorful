@@ -19,20 +19,20 @@ class View
 {
 
 	/**
-	 * Name of view.
-	 * @var string
-	 * 
-	 */
-
-	private static $_name;
-
-	/**
 	 * Data of view.
 	 * @var array
 	 * 
 	 */
 
 	private static $_data = [];
+
+	/**
+	 * Name of view.
+	 * @var string
+	 * 
+	 */
+
+	private static $_name = '';
 
 	/**
 	 * Views files directory.
@@ -69,7 +69,10 @@ class View
 	public static function add($name, $value = null)
 	{
 		if(is_array($name))
-			self::$_data = array_merge(self::$_data, $name);
+		{
+			foreach($name as $key => $value)
+				self::$_data[$key] = $value;
+		}
 		else
 			self::$_data[$name] = $value;
 	}
@@ -97,16 +100,65 @@ class View
 
 			self::$_name = $name;
 
-			$viewPath = self::$_directory . '/' . str_replace('/', '.', self::$_name) . '.' . self::$_extension;
-			if(is_readable($viewPath))
+			$content = self::_loadViewFile(str_replace('/', '.', self::$_name));
+			if($content !== false)
 			{
-				
+				if(is_array($data) && count($data) > 0)
+					self::add($data);
+
+				$cacheFileName = substr(md5(serialize(self::$_data) . serialize($content)), 0, 9) . '.' . substr(md5(self::$_name), 0, 4);
+
+				$cacheFile = self::_getCacheFile($cacheFileName);
+				if($cacheFile !== false)
+					return $cacheFile;
+				else
+				{
+					$content = self::_parseContent($content);
+					self::_saveCacheFile($cacheFileName, $content);
+					return $content;
+				}
 			}
 			else
 				Core\Error::show('View file is not found: ' . self::$_name . '.' . self::$_extension);
 		}
 		else
 			Core\Error::show('You need to configure View System.', 1200);
+	}
+
+	/**
+	 * Parsing view content.
+	 * @param string $content
+	 * @return string
+	 * 
+	 */
+
+	private static function _parseContent($content)
+	{
+		$content = htmlspecialchars($content);
+		$content = self::$_replaceFunctions($content);
+		$content = self::$_replaceValues($content);
+
+		return htmlspecialchars_decode($content);
+	}
+
+	/**
+	 * Load view file.
+	 * @param string $name
+	 * @return string|boolean
+	 * 
+	 */
+
+	private static function _loadViewFile($name)
+	{
+		$path = self::$_directory . '/' . $name . '.' . self::$_extension;
+		if(is_readable($path))
+		{
+			ob_start();
+			require $path;
+			return ob_get_clean();
+		}
+
+		return false;
 	}
 
 	/**

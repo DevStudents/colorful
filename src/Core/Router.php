@@ -18,20 +18,12 @@ class Router
 {
 
 	/**
-	 * URL request split on parts.
+	 * Routes array.
 	 * @var array
 	 * 
 	 */
 
-	private static $_parts = [];
-
-	/**
-	 * Data of URL request params for Router, ex. [id].
-	 * @var array
-	 * 
-	 */
-
-	private static $_requestParams = [];
+	private static $_routes = [];
 
 	/**
 	 * This variable say to have been found matched route.
@@ -48,9 +40,9 @@ class Router
 	 * 
 	 */
 
-	public function __construct($action)
+	public function __construct()
 	{
-		self::$_parts = explode('/', rtrim($action, '/'));
+		
 	}
 
 	/**
@@ -63,7 +55,7 @@ class Router
 
 	public static function get($test, $callback)
 	{
-		self::_run('GET', $test, $callback);
+		self::_addRoute('GET', $test, $callback);
 	}
 
 	/**
@@ -76,7 +68,7 @@ class Router
 
 	public static function post($test, $callback)
 	{
-		self::_run('POST', $test, $callback);
+		self::_addRoute('POST', $test, $callback);
 	}
 
 	/**
@@ -89,7 +81,7 @@ class Router
 
 	public static function put($test, $callback)
 	{
-		self::_run('PUT', $test, $callback);	
+		self::_addRoute('PUT', $test, $callback);	
 	}
 
 	/**
@@ -102,7 +94,21 @@ class Router
 
 	public static function delete($test, $callback)
 	{
-		self::_run('DELETE', $test, $callback);
+		self::_addRoute('DELETE', $test, $callback);
+	}
+
+	/**
+	 * Add route.
+	 * @param string $method
+	 * @param string $test
+	 * @param function $callback
+	 * @return void
+	 * 
+	 */
+
+	private static function _addRoute($method, $test, $callback)
+	{
+		self::$_routes[]
 	}
 
 	/**

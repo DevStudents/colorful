@@ -8,6 +8,7 @@
  */
 
 namespace sintloer\COLORFUL\Core;
+use sintloer\COLORFUL\Core\Http\Request;
 
 /**
  * Initialize class.
@@ -19,19 +20,33 @@ class Initialize
 
 	/**
 	 * Constructor of Initialize class.
-	 * @param string $env
+	 * @param string $mode
 	 * @return void
 	 * 
 	 */
 
-	public function __construct($env)
+	public function __construct($mode)
 	{
-		$envTypes = ['DEVELOPMENT', 'PRODUCTION'];
+		$this->_env($mode);
+		$this->_runCOLORFUL();
+	}
 
-		if(!in_array($env, $envTypes))
-			Error::show('You need to configure ENV.', 1001);
+	/**
+	 * Set environment mode.
+	 * @return void
+	 * 
+	 */
+	
+	private function _env($mode)
+	{
+		$env = ['DEVELOPMENT', 'PRODUCTION'];
 
-		switch($env)
+		if(!in_array($mode, $env))
+			Error::show('You need to configure ENV.', 1001, [
+					'env' => $env
+				]);
+
+		switch($mode)
 		{
 			case 'DEVELOPMENT':
 				error_reporting(E_ALL);
@@ -41,9 +56,19 @@ class Initialize
 				error_reporting(0);
 				break;
 		}
-
-		$request = new Request();
-		$router = new Router($request->getAction());
 	}
 
+	/**
+	 * Constructor of Initialize class.
+	 * @return void
+	 * 
+	 */
+	
+	private function _runCOLORFUL()
+	{
+		new Executor(
+				new Request(),
+				new Router()
+			);
+	}
 }

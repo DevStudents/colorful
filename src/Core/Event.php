@@ -34,8 +34,7 @@ class Event
 	
 	public static function register($name)
 	{
-		//if(!isset(self::$_events[$name]))
-			self::$_events[$name] = true;
+		self::$_events[$name] = true;
 	}
 
 	/**
@@ -80,7 +79,6 @@ class Event
 
 	public static function has($name)
 	{
-
 		if(isset(self::$_events[$name]))
 			return true;
 

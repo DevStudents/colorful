@@ -60,11 +60,6 @@ use sintloer\COLORFUL\Components\Helpers;
 ->get('/', function() {
 
 	Response::display(View::load('home'));
-
-	/*Response::json([
-			'asdasd' => 10,
-			'html' => View::load('siema')
-		]);*/
 })
 
 /* EVENTS */

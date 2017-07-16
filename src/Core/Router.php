@@ -108,7 +108,7 @@ class Router
 
 	private static function _addRoute($method, $test, $callback)
 	{
-		self::$_routes[]
+		self::$_routes[] = null;
 	}
 
 	/**

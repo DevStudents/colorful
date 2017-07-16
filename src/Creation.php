@@ -18,7 +18,7 @@ class Creation
 {
 
 	/**
-	 * Version number.
+	 * COLORFUL version.
 	 * @var string
 	 * 
 	 */
@@ -26,15 +26,7 @@ class Creation
 	const VERSION = '0.2.0';
 
 	/**
-	 * Configured flag.
-	 * @var boolean
-	 * 
-	 */
-	
-	private $_configured = false;
-
-	/**
-	 * Initialize autoload, set environment type and load basic components.
+	 * Creation constructor.
 	 * @param string $mode
 	 * @return void
 	 * 
@@ -42,21 +34,19 @@ class Creation
 	
 	public function __construct($mode)
 	{
-		new Core\Initialize($mode);
+		
 	}
 
 	/**
-	 * Adding data to Config object by static method.
-	 * @param array $configs
+	 * Adding data to Config.
+	 * @param array $config
 	 * @return object
 	 * 
 	 */
 
-	public function config($configs)
+	public function config($config)
 	{
-		Core\Config::set($configs);
-		$this->_configured = true;
-
+		
 		return $this;
 	}
 
@@ -67,19 +57,14 @@ class Creation
 	 * 
 	 */
 
-	public function initialize($callback)
+	public function before($callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
-
-		if(is_callable($callback))
-			$res = $callback();
-
+		
 		return $this;
 	}
 
 	/**
-	 * Router GET method.
+	 * GET method.
 	 * @param string $test
 	 * @param function $callback
 	 * @return object|boolean
@@ -88,15 +73,13 @@ class Creation
 	
 	public function get($test, $callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
+		
 
-		Core\Router::get($test, $callback);
 		return $this;
 	}
 
 	/**
-	 * Router POST method.
+	 * POST method.
 	 * @param string $test
 	 * @param function $callback
 	 * @return object|boolean
@@ -105,15 +88,13 @@ class Creation
 
 	public function post($test, $callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
+		
 
-		Core\Router::post($test, $callback);
 		return $this;
 	}
 
 	/**
-	 * Router PUT method.
+	 * PUT method.
 	 * @param string $test
 	 * @param function $callback
 	 * @return object|boolean
@@ -122,15 +103,13 @@ class Creation
 
 	public function put($test, $callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
+		
 
-		Core\Router::put($test, $callback);
 		return $this;
 	}
 
 	/**
-	 * Router DELETE method.
+	 * DELETE method.
 	 * @param string $test
 	 * @param function $callback
 	 * @return object|boolean
@@ -139,10 +118,8 @@ class Creation
 
 	public function delete($test, $callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
+		
 
-		Core\Router::delete($test, $callback);
 		return $this;
 	}
 
@@ -156,14 +133,7 @@ class Creation
 
 	public function when($name, $callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
-
-		if(Core\Event::check($name))
-		{
-			if(is_callable($callback))
-				$callback();
-		}
+		
 
 		return $this;
 	}
@@ -175,26 +145,20 @@ class Creation
 	 * 
 	 */
 
-	public function finish($callback)
+	public function after($callback)
 	{
-		if(!$this->_isConfigured())
-			return false;
-
-		if(is_callable($callback))
-			$callback();
+		
+		return $this;
 	}
 
 	/**
-	 * Check if configured.
-	 * @return boolean
+	 * Creation destructor.
+	 * @return void
 	 * 
 	 */
-
-	public function _isConfigured()
+	
+	public function __destruct()
 	{
-		if($this->_configured === true)
-			return true;
-		else
-			Core\Error::show('First you need to call the config() method. Later you can call the rest.', 1000);
+		
 	}
 }

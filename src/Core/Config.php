@@ -52,7 +52,7 @@ class Config
 
 		foreach(self::$_required as $field)
 		{
-			if(!self::has($field))
+			if(!isset(self::$_data[$field]))
 			{
 				if($field !== $data && !isset(self::$_data[$field]))
 					Error::show('You need to configure fields: <b>' . implode('</b>, <b>', self::$_required) . '</b>', 1002, [
@@ -65,7 +65,7 @@ class Config
 	/**
 	 * Get value from static $_data.
 	 * @param string $str
-	 * @return string|boolean
+	 * @return string
 	 * 
 	 */
 
@@ -74,39 +74,24 @@ class Config
 		$parts = explode('.', $str);
 
 		if(count($parts) == 0)
-			return false;
+			return '';
 
 		$tmp = null;
 		foreach($parts as $k)
 		{
 			if($tmp === null)
-				if(self::has($k))
+				if(isset(self::$_data[$k]))
 					$tmp = self::$_data[$k];
 				else
-					return false;
+					return '';
 			else
 				if(isset($tmp[$k]))
 					$tmp = $tmp[$k];
 				else
-					return false;
+					return '';
 		}
 
 		return $tmp;
-	}
-
-	/**
-	 * Check that exists key in static $_data.
-	 * @param string $name
-	 * @return boolean
-	 * 
-	 */
-
-	public static function has($name)
-	{
-		if(isset(self::$_data[$name]))
-			return true;
-
-		return false;
 	}
 
 }

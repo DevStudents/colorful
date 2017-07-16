@@ -46,9 +46,9 @@ use sintloer\COLORFUL\Components\Helpers;
 
 ])
 
-/* INITIALIZE METHOD */
+/* START METHOD */
 
-->initialize(function() {
+->before(function() {
 
 	Store::save([
 			'Database' => Database::get('first'),
@@ -62,6 +62,11 @@ use sintloer\COLORFUL\Components\Helpers;
 	Response::display(View::load('home'));
 })
 
+->get('/aaa/:id', function($id) {
+
+	echo 1;
+})
+
 /* EVENTS */
 
 ->when('404', function() {
@@ -71,7 +76,7 @@ use sintloer\COLORFUL\Components\Helpers;
 
 /* FINISH METHOD */
 
-->finish(function() {
+->after(function() {
 
 	Database::closeAll();
 });

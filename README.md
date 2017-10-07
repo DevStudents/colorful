@@ -1,2 +1,1 @@
 # COLORFULframework
-Minimalist PHP framework

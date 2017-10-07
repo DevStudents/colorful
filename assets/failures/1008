@@ -1,0 +1,15 @@
+...
+
+->setup([
+
+	...
+
+<?php foreach($fields as $field => $info): ?>
+	'<?php echo $field; ?>' => <b>#(<?php echo $info['type']; ?>)</b>, /* <?php echo $info['message']; ?> */
+<?php endforeach; ?>
+
+	...
+
+])
+
+...

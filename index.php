@@ -3,80 +3,22 @@
 require __DIR__ . '/vendor/autoload.php';
 
 use sintloer\COLORFUL\Creation;
-use sintloer\COLORFUL\Components\Request;
-use sintloer\COLORFUL\Components\Response;
-use sintloer\COLORFUL\Components\Store;
-use sintloer\COLORFUL\Components\Database;
-use sintloer\COLORFUL\Components\View;
-use sintloer\COLORFUL\Components\Auth;
-use sintloer\COLORFUL\Components\Helpers;
+$COLORFULframework = new Creation('DEVELOPMENT');
 
-(new Creation('DEVELOPMENT'))
+/* CONFIGURATION */
+require './usage/setup.php';
 
-/* SET CONFIGURATION */
-
-->config([
-
-	'secret' => '4dca5c48abaed0f53aef24d9b6b5a9e0e1401f3f',
-
-	'databases' => [
-		'first' => [
-			'driver' => 'mysql',
-			'host' => 'localhost',
-			'username' => 'root',
-			'password' => '',
-			'name' => 'sintloer',
-			'prefix' => ''
-		],
-		'second' => [
-			'driver' => 'mysql',
-			'host' => 'localhost',
-			'username' => 'root',
-			'password' => '',
-			'name' => 'sintloer',
-			'prefix' => ''
-		]
-	],
-
-	'views' => [
-		'directory' => __DIR__ . '/views',
-		'cacheDirectory' => __DIR__ . '/views/_cache',
-		'extension' => 'v'
-	]
-
-])
+/* LISTENERS */
+require './usage/listeners.php';
 
 /* START METHOD */
+require './usage/before.php';
 
-->before(function() {
+/* ROUTES V1 */
+require './usage/routesV1.php';
 
-	Store::save([
-			'Database' => Database::get('first'),
-		]);
-})
-
-/* ROUTES */
-
-->get('/', function() {
-
-	Response::display(View::load('home'));
-})
-
-->get('/aaa/:id', function($id) {
-
-	echo 1;
-})
-
-/* EVENTS */
-
-->when('404', function() {
-
-	Response::error('404', 404);
-})
+/* ROUTES V2 */
+require './usage/routesV2.php';
 
 /* FINISH METHOD */
-
-->after(function() {
-
-	Database::closeAll();
-});
+require './usage/after.php';

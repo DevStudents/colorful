@@ -1,11 +1,10 @@
 {
-    "name": "sintloer/COLORFUL",
+    "name": "sintloer/colorful",
     "description": "COLORFULframework",
-    "keywords": ["php"],
-    "version": "0.2.0",
+    "keywords": ["php", "tiny", "framework", "rest", "api"],
     "type": "framework",
     "license": "MIT",
-    "homepage": "https://github.com/sintloer/COLORFUL-framework",
+    "homepage": "https://github.com/sintloer/colorful",
     "authors": [
         {
             "name": "sintloer",
@@ -18,7 +17,10 @@
         }
     },
     "require": {
-        "php": ">=7.0.9",
+        "php": ">=5.5",
         "firebase/php-jwt": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^6.2"
     }
 }

@@ -1,0 +1,9 @@
+...
+
+-><?= strtolower($method); ?>(<b>#(path)</b>, <b>function()</b> {
+	
+		...
+
+})
+
+...

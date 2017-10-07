@@ -1,5 +1,4 @@
-views/_cache
-vendor
+vendor/
+usage/
 *.sublime-*
-composer.lock
 index.php

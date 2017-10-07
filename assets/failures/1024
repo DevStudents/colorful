@@ -1,0 +1,25 @@
+...
+
+->routes([
+
+	...
+
+	<b>#(method/methods)</b> => [ /* <?php echo implode(', ', $methods); ?> */
+
+		...
+
+		<b>#(path)</b> => <b>function($request, $response)</b> {
+
+			...
+
+		}
+
+		...
+
+	]
+
+	...
+
+])
+
+...

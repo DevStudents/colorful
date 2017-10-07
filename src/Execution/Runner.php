@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Execution;
@@ -21,7 +21,7 @@ class Runner
 	/**
 	 * After executed flag.
 	 * @var boolean
-	 * 
+	 *
 	 */
 
 	private static $_executed = false;
@@ -29,9 +29,9 @@ class Runner
 	/**
 	 * Start method.
 	 * This execute all of framework.
-	 * 
+	 *
 	 */
-	
+
 	public static function start()
 	{
 		$request = new Request();
@@ -82,7 +82,7 @@ class Runner
 	/**
 	 * Get after executed flag.
 	 * @return boolean
-	 * 
+	 *
 	 */
 
 	public static function executed()

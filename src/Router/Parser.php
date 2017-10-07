@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Router;
@@ -20,9 +20,9 @@ class Parser
 	 * @param Request $request
 	 * @param array $routes
 	 * @return mixed
-	 * 
+	 *
 	 */
-	
+
 	public static function run(Request $request, $routes)
 	{
 		if(!is_array($routes))
@@ -77,7 +77,7 @@ class Parser
 
 						$name = $nameSegments[0];
 					}
-					
+
 					$name = ltrim($name, ':');
 					$params[$name] = $value;
 					$found = true;

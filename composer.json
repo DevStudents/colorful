@@ -3,7 +3,6 @@
     "description": "COLORFULframework",
     "keywords": ["php", "tiny", "framework", "rest", "api"],
     "type": "framework",
-    "version": "0.0.2",
     "license": "MIT",
     "homepage": "https://github.com/sintloer/colorful",
     "authors": [

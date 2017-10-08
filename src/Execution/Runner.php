@@ -11,7 +11,7 @@ namespace sintloer\COLORFUL\Execution;
 
 use sintloer\COLORFUL\Http\Request;
 use sintloer\COLORFUL\Http\Response;
-use sintloer\COLORFUL\Collections;
+use sintloer\COLORFUL\Store;
 use sintloer\COLORFUL\Router;
 use sintloer\COLORFUL\Event;
 
@@ -38,16 +38,16 @@ class Runner
 		$response = new Response();
 
 		Event\Caller::init(
-				Collections\Listeners::all(),
+				Store\Listeners::all(),
 				[ $request, $response ]
 			);
 
 		$router = Router\Parser::run(
 						$request,
-						Collections\Routes::all()
+						Store\Routes::all()
 					);
 
-		$beforeCallback = Callbacks\Before::get();
+		$beforeCallback = Store\Callbacks\Before::get();
 		if(is_callable($beforeCallback))
 			$beforeCallback(
 					$request,
@@ -56,12 +56,16 @@ class Runner
 
 		if($router === false)
 			Event\Caller::run(
-					Event\Events::LACK
+					Store\Events::LACK
 				);
 		else
 		{
 			if(is_callable($router))
 			{
+				Event\Caller::run(
+						Store\Events::FOUND
+					);
+
 				if(version_compare(PHP_VERSION, '5.6.0', '>='))
 					$router($request, $response, ...array_values($request->params));
 				else
@@ -69,7 +73,7 @@ class Runner
 			}
 		}
 
-		$afterCallback = Callbacks\After::get();
+		$afterCallback = Store\Callbacks\After::get();
 		if(is_callable($afterCallback))
 			$afterCallback(
 					$request,

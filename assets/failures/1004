@@ -1,5 +1,25 @@
 ...
 
-(new Creation(<b>#(mode)</b>)) /* <?php echo implode(' | ', $modes); ?> */
+->when([
+
+	...
+
+	<b>#(name:string)</b> => <b>function($request, $response)</b> {
+
+		...
+
+	}
+
+	...
+
+])
+
+----
+
+->when(<b>#(string)</b>, <b>function($request, $response)</b> {
+	
+	...
+
+})
 
 ...

@@ -5,9 +5,6 @@ require __DIR__ . '/vendor/autoload.php';
 use sintloer\COLORFUL\Creation;
 $COLORFULframework = new Creation('DEVELOPMENT');
 
-/* CONFIGURATION */
-require './usage/setup.php';
-
 /* LISTENERS */
 require './usage/listeners.php';
 

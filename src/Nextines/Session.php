@@ -4,21 +4,21 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Nextines;
 
-class Session
+class Session extends Nextine
 {
 
 	/**
 	 * Start session.
 	 * @param mixed $name (optional)
 	 * @param mixed $id (optional)
-	 * 
+	 *
 	 */
-	
+
 	public static function start($name = null, $id = null)
 	{
 		if(gettype($name) === 'string')
@@ -38,9 +38,9 @@ class Session
 	 * @param string $name
 	 * @param mixed $value (optional)
 	 * @return boolean
-	 * 
+	 *
 	 */
-	
+
 	public static function set($name, $value = null)
 	{
 		if(is_array($name))
@@ -56,9 +56,9 @@ class Session
 	 * Get session key.
 	 * @param string $name
 	 * @return boolean
-	 * 
+	 *
 	 */
-	
+
 	public static function get($name)
 	{
 		if(self::has($name))
@@ -69,9 +69,9 @@ class Session
 	 * Remove session value by key.
 	 * @param string $name
 	 * @return boolean
-	 * 
+	 *
 	 */
-	
+
 	public static function remove($name)
 	{
 		if(self::has($name))
@@ -84,9 +84,9 @@ class Session
 	 * Check if session key exists.
 	 * @param string $name
 	 * @return boolean
-	 * 
+	 *
 	 */
-	
+
 	public static function has($name)
 	{
 		if(isset($_SESSION[$name]))
@@ -97,9 +97,9 @@ class Session
 
 	/**
 	 * Session destroy method.
-	 * 
+	 *
 	 */
-	
+
 	public static function destroy()
 	{
 		session_destroy();

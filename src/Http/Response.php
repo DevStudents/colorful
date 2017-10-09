@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Http;
@@ -15,7 +15,7 @@ class Response
 	/**
 	 * Set HTTP response code.
 	 * @param int $code
-	 * 
+	 *
 	 */
 
 	public function code($code)
@@ -27,7 +27,7 @@ class Response
 	 * Set HTTP response headers.
 	 * @param string $name
 	 * @param mixed $value
-	 * 
+	 *
 	 */
 
 	public function headers($name, $value = null)
@@ -35,10 +35,10 @@ class Response
 		if(is_array($name))
 		{
 			foreach($name as $key => $value)
-				header($key . ': ' . $value);
+				@header($key . ': ' . $value);
 		}
 
-		header($name . ': ' . $value);
+		@header($name . ': ' . $value);
 	}
 
 	/**
@@ -46,7 +46,7 @@ class Response
 	 * @param array $data
 	 * @param int $code (optional)
 	 * @param string $type (optional)
-	 * 
+	 *
 	 */
 
 	public function json($data, $code = 200, $type = 'application/json')
@@ -62,7 +62,7 @@ class Response
 	 * Display HTML.
 	 * @param string $data
 	 * @return boolean|null
-	 * 
+	 *
 	 */
 
 	public function display($str)
@@ -74,7 +74,7 @@ class Response
 	/**
 	 * Redirect response.
 	 * @param string $url
-	 * 
+	 *
 	 */
 
 	public function redirect($url, $code = 303)
@@ -88,7 +88,7 @@ class Response
 	 * Response error.
 	 * @param string $msg
 	 * @param int $code
-	 * 
+	 *
 	 */
 
 	public function error($msg, $code = 404)

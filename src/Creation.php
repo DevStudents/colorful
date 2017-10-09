@@ -24,7 +24,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.0.3';
+	const VERSION = '0.0.4';
 
 	/**
 	 * Environment modes.
@@ -82,10 +82,12 @@ class Creation
 		switch($env)
 		{
 			case $modes['d']:
+				ini_set('display_errors', 'on');
 				error_reporting(E_ALL);
 				break;
 
 			case $modes['p']:
+				ini_set('display_errors', 'off');
 				error_reporting(0);
 				break;
 		}

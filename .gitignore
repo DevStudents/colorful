@@ -2,3 +2,4 @@ vendor/
 /usage
 *.sublime-*
 index.php
+.DS_Store

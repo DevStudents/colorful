@@ -24,7 +24,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.0.5';
+	const VERSION = '0.1.0';
 
 	/**
 	 * Environment modes.
@@ -108,6 +108,13 @@ class Creation
 		if(Store\Callbacks\Before::has())
 			return false;
 
+		if(is_array($callback))
+		{
+			$callbackFromArray = $this->_getCallbackFromArray($callback);
+			if($callbackFromArray !== false)
+				$callback = $callbackFromArray;
+		}
+
 		if(!is_callable($callback))
 			return Failure\Message::show('Your before() method call returns an failure. Check your syntax.', 1002);
 
@@ -127,6 +134,13 @@ class Creation
 	{
 		if(Store\Callbacks\After::has())
 			return false;
+
+		if(is_array($callback))
+		{
+			$callbackFromArray = $this->_getCallbackFromArray($callback);
+			if($callbackFromArray !== false)
+				$callback = $callbackFromArray;
+		}
 
 		if(!is_callable($callback))
 			return Failure\Message::show('Your after() method call returns an failure. Check your syntax.', 1003);
@@ -157,6 +171,13 @@ class Creation
 
 		foreach($result as $name => $callback)
 		{
+			if(is_array($callback))
+			{
+				$callbackFromArray = $this->_getCallbackFromArray($callback);
+				if($callbackFromArray !== false)
+					$callback = $callbackFromArray;
+			}
+
 			if(gettype($name) !== 'string' || !is_callable($callback))
 				return Failure\Message::show('Your when() method call returns an failure. Check your syntax.', 1004);
 
@@ -199,6 +220,13 @@ class Creation
 
 				foreach($routes as $path => $callback)
 				{
+					if(is_array($callback))
+					{
+						$callbackFromArray = $this->_getCallbackFromArray($callback);
+						if($callbackFromArray !== false)
+							$callback = $callbackFromArray;
+					}
+
 					if(gettype($path) !== 'string' || !is_callable($callback))
 					{
 						if($bySimpleMethod)
@@ -282,5 +310,36 @@ class Creation
 	public function __destruct()
 	{
 		$this->run();
+	}
+
+	/**
+	 * Get callback from array.
+	 * @param array $array
+	 * @return mixed
+	 *
+	 */
+
+	private function _getCallbackFromArray($array)
+	{
+		if(count($array) == 2)
+		{
+			$class = $array[0];
+			$classMethod = $array[1];
+
+			if(class_exists($class))
+			{
+				$obj = new $class();
+				if(method_exists($obj, $classMethod))
+				{
+					$reflection = new \ReflectionMethod($obj, $classMethod);
+					$closure = $reflection->getClosure($obj);
+
+					if(is_callable($closure))
+						return $closure;
+				}
+			}
+		}
+
+		return false;
 	}
 }

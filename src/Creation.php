@@ -245,7 +245,7 @@ class Creation
 	public function __call($name, $arguments)
 	{
 		$name = strtoupper($name);
-		if(in_array($name, Globals::$HTTP_METHODS))
+		if(in_array($name, self::$HTTP_METHODS))
 		{
 			if(count($arguments) == 2)
 				$this->routes(

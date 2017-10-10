@@ -25,4 +25,15 @@ class StoreTest extends TestCase
     {
         $this->assertInternalType('string', Store::get('closure'));
     }
+
+    public function testRemoveObject()
+    {
+        Store::remove('number');
+        $this->assertFalse(Store::get('number'));
+    }
+
+    public function testCleanStore()
+    {
+        $this->assertTrue(Store::clean());
+    }
 }

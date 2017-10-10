@@ -1,7 +1,5 @@
 # COLORFULframework
 
-<br>
-
 ## contents
 
 - [gettingSTARTED](#gettingstarted)

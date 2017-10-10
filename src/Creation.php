@@ -105,7 +105,7 @@ class Creation
 
 	public function before($callback)
 	{
-		if(Store\Callbacks\Before::has())
+		if(Store\Before::has() && !defined('PHPUNIT'))
 			return false;
 
 		if(is_array($callback))
@@ -118,7 +118,7 @@ class Creation
 		if(!is_callable($callback))
 			return Failure\Message::show('Your before() method call returns an failure. Check your syntax.', 1002);
 
-		Store\Callbacks\Before::set($callback);
+		Store\Before::set($callback);
 		return $this;
 	}
 
@@ -132,7 +132,7 @@ class Creation
 
 	public function after($callback)
 	{
-		if(Store\Callbacks\After::has())
+		if(Store\After::has() && !defined('PHPUNIT'))
 			return false;
 
 		if(is_array($callback))
@@ -145,7 +145,7 @@ class Creation
 		if(!is_callable($callback))
 			return Failure\Message::show('Your after() method call returns an failure. Check your syntax.', 1003);
 
-		Store\Callbacks\After::set($callback);
+		Store\After::set($callback);
 		return $this;
 	}
 
@@ -266,7 +266,7 @@ class Creation
 	 * Add routes by call to name of HTTP methods function.
 	 * @param string $name
 	 * @param array $arguments
-	 * @return mixed
+	 * @return boolean
 	 *
 	 */
 
@@ -276,12 +276,19 @@ class Creation
 		if(in_array($name, self::$HTTP_METHODS))
 		{
 			if(count($arguments) == 2)
-				$this->routes(
+			{
+				$result = $this->routes(
 						[ $name => [ $arguments[0] => $arguments[1] ] ],
 						false,
 						true
 					);
+
+				if($result === false)
+					return false;
+			}
 		}
+
+		return $this;
 	}
 
 	/**

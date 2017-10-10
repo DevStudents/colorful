@@ -24,13 +24,14 @@ class Routes
 	/**
 	 * Add route to storage.
 	 * @param Route $route
-	 * @return mixed
+	 * @return boolean
 	 *
 	 */
 
 	public static function add(Route $route)
 	{
 		self::$_routes[$route->getMethod()][$route->getPath()] = $route->getCallback();
+		return true;
 	}
 
 	/**

@@ -7,10 +7,10 @@
  *
  */
 
-namespace sintloer\COLORFUL\Store\Callbacks;
+namespace sintloer\COLORFUL\Store;
 use Closure;
 
-class After
+class Before
 {
 
 	/**
@@ -19,17 +19,19 @@ class After
 	 *
 	 */
 
-	private static $_after = null;
+	private static $_before = null;
 
 	/**
 	 * Set callback.
 	 * @param Closure $callback
+	 * @return boolean
 	 *
 	 */
 
 	public static function set(Closure $callback)
 	{
-		self::$_after = $callback;
+		self::$_before = $callback;
+		return true;
 	}
 
 	/**
@@ -40,7 +42,7 @@ class After
 
 	public static function get()
 	{
-		return self::$_after;
+		return self::$_before;
 	}
 
 	/**
@@ -51,6 +53,6 @@ class After
 
 	public static function has()
 	{
-		return self::$_after !== null;
+		return self::$_before !== null;
 	}
 }

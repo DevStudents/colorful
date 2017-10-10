@@ -37,7 +37,7 @@ class Session extends Nextine
 	 * Set session.
 	 * @param string $name
 	 * @param mixed $value (optional)
-	 * @return boolean
+	 * @return mixed
 	 *
 	 */
 
@@ -47,6 +47,8 @@ class Session extends Nextine
 		{
 			foreach($name as $key => $value)
 				$_SESSION[$key] = $value;
+
+			return;
 		}
 
 		$_SESSION[$name] = $value;
@@ -55,7 +57,7 @@ class Session extends Nextine
 	/**
 	 * Get session key.
 	 * @param string $name
-	 * @return boolean
+	 * @return mixed
 	 *
 	 */
 
@@ -63,6 +65,8 @@ class Session extends Nextine
 	{
 		if(self::has($name))
 			return $_SESSION[$name];
+
+		return false;
 	}
 
 	/**
@@ -102,6 +106,8 @@ class Session extends Nextine
 
 	public static function destroy()
 	{
-		session_destroy();
+		@session_unset();
+		@session_destroy();
+		$_SESSION = [];
 	}
 }

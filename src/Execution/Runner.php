@@ -47,7 +47,7 @@ class Runner
 						Store\Routes::all()
 					);
 
-		$beforeCallback = Store\Callbacks\Before::get();
+		$beforeCallback = Store\Before::get();
 		if(is_callable($beforeCallback))
 			$beforeCallback(
 					$request,
@@ -73,7 +73,7 @@ class Runner
 			}
 		}
 
-		$afterCallback = Store\Callbacks\After::get();
+		$afterCallback = Store\After::get();
 		if(is_callable($afterCallback))
 			$afterCallback(
 					$request,

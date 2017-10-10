@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Failure;
@@ -15,9 +15,9 @@ class Message
 	/**
 	 * Failure exists flag.
 	 * @var boolean
-	 * 
+	 *
 	 */
-	
+
 	private static $_has = false;
 
 	/**
@@ -26,9 +26,9 @@ class Message
 	 * @param int $code
 	 * @param array $data
 	 * @return mixed
-	 * 
+	 *
 	 */
-	
+
 	public static function show($message, $code = 0, $data = [])
 	{
 		self::$_has = true;
@@ -53,7 +53,7 @@ class Message
 	/**
 	 * Check if failure exists.
 	 * @return boolean
-	 * 
+	 *
 	 */
 
 	public static function has()

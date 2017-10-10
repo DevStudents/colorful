@@ -37,6 +37,8 @@ class Cookie extends Nextine
 	{
 		if(self::has($name))
 			return $_COOKIE[$name];
+
+		return false;
 	}
 
 	/**

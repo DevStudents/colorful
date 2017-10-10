@@ -15,18 +15,21 @@ class Response
 	/**
 	 * Set HTTP response code.
 	 * @param int $code
+	 * @return int
 	 *
 	 */
 
 	public function code($code)
 	{
 		http_response_code((int) $code);
+		return http_response_code();
 	}
 
 	/**
 	 * Set HTTP response headers.
 	 * @param string $name
 	 * @param mixed $value
+	 * @return mixed
 	 *
 	 */
 
@@ -36,6 +39,8 @@ class Response
 		{
 			foreach($name as $key => $value)
 				@header($key . ': ' . $value);
+
+			return;
 		}
 
 		@header($name . ': ' . $value);

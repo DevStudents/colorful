@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Http;
@@ -16,45 +16,57 @@ class Request
 	/**
 	 * Action storage.
 	 * @var string
-	 * 
+	 *
 	 */
-	
+
 	private $_action;
 
 	/**
 	 * Method storage.
 	 * @var string
-	 * 
+	 *
 	 */
-	
+
 	private $_method;
 
 	/**
 	 * Input storage.
 	 * @var array
-	 * 
+	 *
 	 */
-	
+
 	private $_input;
 
 	/**
 	 * Params storage.
 	 * @var array
-	 * 
+	 *
 	 */
-	
+
 	public $params = [];
 
 	/**
 	 * Constructor.
-	 * 
+	 *
 	 */
 
-	public function __construct()
+	public function __construct($action = '', $method = '', $input = [])
 	{
-		$this->_action = '/' . (isset($_GET['_cfACTION']) ? $_GET['_cfACTION'] : '');
-		$this->_method = strtoupper((isset($_GET['_method']) ? $_GET['_method'] : (isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '')));
-		$this->_input = @json_decode(file_get_contents('php://input'), true);
+		if(!empty($action))
+			$this->_action = $action;
+		else
+			$this->_action = '/' . (isset($_GET['_cfACTION']) ? $_GET['_cfACTION'] : '');
+
+		if(!empty($method))
+			$this->_method = $method;
+		else
+			$this->_method = strtoupper((isset($_GET['_method']) ? $_GET['_method'] : (isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : '')));
+
+		if(is_array($input) && count($input) > 0)
+			$this->_input = $input;
+		else
+			$this->_input = @json_decode(file_get_contents('php://input'), true);
+
 		if(!is_array($this->_input))
 			$this->_input = [];
 	}
@@ -62,7 +74,7 @@ class Request
 	/**
 	 * Get current action.
 	 * @return string
-	 * 
+	 *
 	 */
 
 	public function action()
@@ -73,7 +85,7 @@ class Request
 	/**
 	 * Get method.
 	 * @return string
-	 * 
+	 *
 	 */
 
 	public function method()
@@ -86,7 +98,7 @@ class Request
 	 * @param string $name
 	 * @param string $defaultValue (optional)
 	 * @return mixed
-	 * 
+	 *
 	 */
 
 	public function param($name, $defaultValue = '')
@@ -102,7 +114,7 @@ class Request
 	 * @param string name
 	 * @param mixed $defaultValue (optional)
 	 * @return mixed
-	 * 
+	 *
 	 */
 
 	public function input($name, $defaultValue = false)
@@ -123,7 +135,7 @@ class Request
 	 * Get header parameter.
 	 * @param string $name
 	 * @return mixed
-	 * 
+	 *
 	 */
 
 	public function header($name)

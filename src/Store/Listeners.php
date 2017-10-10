@@ -24,13 +24,14 @@ class Listeners
 	/**
 	 * Save method.
 	 * @param Listener $listener
-	 * @return mixed
+	 * @return boolean
 	 *
 	 */
 
 	public static function add(Listener $listener)
 	{
 		self::$_listeners[$listener->getName()] = $listener->getCallback();
+		return true;
 	}
 
 	/**

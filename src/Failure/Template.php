@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Failure;
@@ -17,10 +17,10 @@ class Template
 	 * Display Failure.
 	 * @param string $message
 	 * @param string $code
-	 * @return string
-	 * 
+	 * @return boolean
+	 *
 	 */
-	
+
 	public static function display($message, $code, $reports, $helper)
 	{
 		$data = [
@@ -55,9 +55,15 @@ class Template
 				}
 			}
 
-			echo $content;
+			if(!defined('PHPUNIT'))
+				echo $content;
+				
+			return true;
 		}
 		else
+		{
 			echo 'COLORFULframework Failure: ' . $message;
+			return false;
+		}
 	}
 }

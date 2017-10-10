@@ -4,7 +4,7 @@
  * COLORFULframework
  * @author sintloer <me@sintloer.com>
  * @license MIT
- * 
+ *
  */
 
 namespace sintloer\COLORFUL\Event;
@@ -18,25 +18,25 @@ class Caller
 	/**
 	 * Listeners storage.
 	 * @var array
-	 * 
+	 *
 	 */
-	
+
 	private static $_listeners = [];
 
 	/**
 	 * Request object storage.
 	 * @var Request
-	 * 
+	 *
 	 */
-	
+
 	private static $_request;
 
 	/**
 	 * Response object storage.
 	 * @var Response
-	 * 
+	 *
 	 */
-	
+
 	private static $_response;
 
 	/**
@@ -44,9 +44,9 @@ class Caller
 	 * @param array $listeners
 	 * @param array $objects
 	 * @return mixed
-	 * 
+	 *
 	 */
-	
+
 	public static function init($listeners, $objects)
 	{
 		if(!is_array($listeners) || !($objects[0] instanceof Request) || !($objects[1] instanceof Response))
@@ -62,9 +62,10 @@ class Caller
 	/**
 	 * Run method.
 	 * @param array $listeners
-	 * 
+	 * @return boolean
+	 *
 	 */
-	
+
 	public static function run($name)
 	{
 		if(isset(self::$_listeners[$name]) && is_callable(self::$_listeners[$name]))
@@ -73,6 +74,10 @@ class Caller
 					self::$_request,
 					self::$_response
 				);
+
+			return true;
 		}
+
+		return false;
 	}
 }

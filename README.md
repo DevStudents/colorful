@@ -1,11 +1,14 @@
 # COLORFULframework
+
 <br>
+
 ## contents
-* [gettingSTARTED](#gettingstarted)
-* [availableMETHODS](#methods)
-* [executionPROCESS](#execution)
-* [nextines](#nextines)
-* [failures](#failures)
+
+- [gettingSTARTED](#gettingstarted)
+- [availableMETHODS](#methods)
+- [executionPROCESS](#execution)
+- [nextines](#nextines)
+- [failures](#failures)
 
 <br>
 

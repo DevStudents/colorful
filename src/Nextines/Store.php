@@ -64,6 +64,24 @@ class Store extends Nextine
     }
 
     /**
+     * Remove object from store.
+     * @param string $name
+     * @return boolean
+     *
+     */
+
+    public static function remove($name)
+    {
+        if(self::has($name))
+        {
+            unset(self::$_data[$name]);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
      * Check if exists object in store.
      * @param string $name
      * @return boolean
@@ -73,5 +91,17 @@ class Store extends Nextine
     public static function has($name)
     {
         return isset(self::$_data[$name]);
+    }
+
+    /**
+     * Clean store.
+     * @return boolean
+     *
+     */
+
+    public static function clean()
+    {
+        self::$_data = [];
+        return true;
     }
 }

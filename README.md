@@ -42,8 +42,8 @@ This is run at the very beginning of the execution process.
 You can configure modules here or create objects for later use with Store [Nextine](#nextines).
 
 ```php
-$COLORFULframework->after(function($request, $response) {
-
+$COLORFULframework->before(function($request, $response) {
+    return 1;
 });
 ```
 
@@ -58,7 +58,7 @@ class Simple
     }
 }
 
-$COLORFULframework->after([ Simple::class, 'any' ]);
+$COLORFULframework->before([ Simple::class, 'any' ]);
 ```
 
 ### - after()

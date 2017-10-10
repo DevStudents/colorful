@@ -47,38 +47,38 @@ class Runner
 						Store\Routes::all()
 					);
 
-		$beforeCallback = Store\Before::get();
-		if(is_callable($beforeCallback))
-			$beforeCallback(
-					$request,
-					$response
-				);
-
 		if($router === false)
 			Event\Caller::run(
 					Store\Events::LACK
 				);
 		else
 		{
-			if(is_callable($router))
-			{
-				Event\Caller::run(
-						Store\Events::FOUND
+			Event\Caller::run(
+					Store\Events::FOUND
+				);
+
+			$beforeCallback = Store\Before::get();
+			if(is_callable($beforeCallback))
+				$beforeCallback(
+						$request,
+						$response
 					);
 
+			if(is_callable($router))
+			{
 				if(version_compare(PHP_VERSION, '5.6.0', '>='))
 					$router($request, $response, ...array_values($request->params));
 				else
 					$router($request, $response);
 			}
-		}
 
-		$afterCallback = Store\After::get();
-		if(is_callable($afterCallback))
-			$afterCallback(
-					$request,
-					$response
-				);
+			$afterCallback = Store\After::get();
+			if(is_callable($afterCallback))
+				$afterCallback(
+						$request,
+						$response
+					);
+		}
 
 		self::$_executed = true;
 	}

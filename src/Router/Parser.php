@@ -55,7 +55,7 @@ class Parser
 
 			for($i = 0; $i < $countOfPathSegments; $i++)
 			{
-				if($pathSegments[$i][0] === ':')
+				if(!empty($pathSegments[$i]) && $pathSegments[$i][0] === ':')
 				{
 					$name = $pathSegments[$i];
 					$value = $actionSegments[$i];

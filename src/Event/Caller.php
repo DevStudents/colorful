@@ -82,7 +82,6 @@ class Caller
 		if(isset(self::$_listeners[$name]) && is_callable(self::$_listeners[$name]))
 		{
 			Helper::bind(self::$_listeners[$name], self::$_context);
-			self::$_helper->bind(self::$_listeners[$name]);
 			(self::$_listeners[$name])(
 					self::$_request,
 					self::$_response

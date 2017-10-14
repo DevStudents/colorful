@@ -29,7 +29,7 @@ class Parser
 			return false;
 
 		$requestAction = $request->action();
-		$actionSegments = explode('/', rtrim($requestAction, '/'));
+		$actionSegments = explode('/', rtrim($requestAction, '/') . '/');
 		$actionSegments[0] = '/';
 		$countOfActionSegments = count($actionSegments);
 

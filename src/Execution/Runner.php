@@ -38,7 +38,7 @@ class Runner
 		$request = new Request();
 		$response = new Response();
 
-		$context = new Context();
+		$context = new Context($request);
 
 		Event\Caller::init(
 				Store\Listeners::all(),

@@ -43,9 +43,9 @@ class Store extends Nextine
         }
 
         if(is_callable($value))
-            self::$_data[$key] = $value();
+            self::$_data[$name] = $value();
         else
-            self::$_data[$key] = $value;
+            self::$_data[$name] = $value;
     }
 
     /**

@@ -14,6 +14,7 @@ use sintloer\COLORFUL\Execution;
 use sintloer\COLORFUL\Store;
 use sintloer\COLORFUL\Router;
 use sintloer\COLORFUL\Event;
+use sintloer\COLORFUL\Utils;
 
 class Creation
 {
@@ -24,7 +25,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.2.2';
+	const VERSION = '0.2.3';
 
 	/**
 	 * Environment modes.
@@ -110,7 +111,7 @@ class Creation
 
 		if(is_array($callback))
 		{
-			$callbackFromArray = $this->_getCallbackFromArray($callback);
+			$callbackFromArray = Utils\Helper::getCallbackFromArray($callback);
 			if($callbackFromArray !== false)
 				$callback = $callbackFromArray;
 		}
@@ -137,7 +138,7 @@ class Creation
 
 		if(is_array($callback))
 		{
-			$callbackFromArray = $this->_getCallbackFromArray($callback);
+			$callbackFromArray = Utils\Helper::getCallbackFromArray($callback);
 			if($callbackFromArray !== false)
 				$callback = $callbackFromArray;
 		}
@@ -173,7 +174,7 @@ class Creation
 		{
 			if(is_array($callback))
 			{
-				$callbackFromArray = $this->_getCallbackFromArray($callback);
+				$callbackFromArray = Utils\Helper::getCallbackFromArray($callback);
 				if($callbackFromArray !== false)
 					$callback = $callbackFromArray;
 			}
@@ -222,7 +223,7 @@ class Creation
 				{
 					if(is_array($callback))
 					{
-						$callbackFromArray = $this->_getCallbackFromArray($callback);
+						$callbackFromArray = Utils\Helper::getCallbackFromArray($callback);
 						if($callbackFromArray !== false)
 							$callback = $callbackFromArray;
 					}
@@ -317,36 +318,5 @@ class Creation
 	public function __destruct()
 	{
 		$this->run();
-	}
-
-	/**
-	 * Get callback from array.
-	 * @param array $array
-	 * @return mixed
-	 *
-	 */
-
-	private function _getCallbackFromArray($array)
-	{
-		if(count($array) == 2)
-		{
-			$class = $array[0];
-			$classMethod = $array[1];
-
-			if(class_exists($class))
-			{
-				$obj = new $class();
-				if(method_exists($obj, $classMethod))
-				{
-					$reflection = new \ReflectionMethod($obj, $classMethod);
-					$closure = $reflection->getClosure($obj);
-
-					if(is_callable($closure))
-						return $closure;
-				}
-			}
-		}
-
-		return false;
 	}
 }

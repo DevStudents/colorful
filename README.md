@@ -34,8 +34,6 @@ $COLORFULframework = new Creation('DEVELOPMENT'); // DEVELOPMENT OR PRODUCTION
 
 ## <a id="methods"></a>Methods
 
-**NOTE:** Each available method on a _**COLORFUL\Creation**_ object returns the current object, but only if the method has been used correctly.
-
 ### before()
 This is run at the very beginning of the execution process.
 You can configure modules here or create objects for later use with Store [Nextine](#nextines).

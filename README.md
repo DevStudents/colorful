@@ -9,19 +9,13 @@
 
 ## <a id="gettingstarted"></a>Getting started
 
-### Require
-
 ```
 composer require sintloer/colorful
 ```
 
-### Install
-
 ```
 composer install
 ```
-
-### Usage
 
 ```php
 <?php

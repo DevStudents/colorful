@@ -1,11 +1,11 @@
 # COLORFULframework
 
-## contents
-
 - [Getting started](#gettingstarted)
 - [Methods](#methods)
 - [Execution](#execution)
 - [Nextines](#nextines)
+
+<br>
 
 ## <a id="gettingstarted"></a>Getting started
 

@@ -9,7 +9,6 @@
 
 namespace sintloer\COLORFUL;
 
-use sintloer\COLORFUL\Failure;
 use sintloer\COLORFUL\Execution;
 use sintloer\COLORFUL\Store;
 use sintloer\COLORFUL\Router;
@@ -25,7 +24,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.2.4';
+	const VERSION = '0.3.0';
 
 	/**
 	 * Environment modes.
@@ -73,27 +72,23 @@ class Creation
 			return false;
 
 		$modes = self::$ENVIRONMENT_MODES;
-		if(!in_array($env, $modes))
+		if(in_array($env, $modes))
 		{
-			return Failure\Message::show('You need to set the environment mode.', 1001, [
-					'modes' => $modes
-				]);
+			switch($env)
+			{
+				case $modes['d']:
+					ini_set('display_errors', 'on');
+					error_reporting(E_ALL);
+					break;
+
+				case $modes['p']:
+					ini_set('display_errors', 'off');
+					error_reporting(0);
+					break;
+			}
+
+			self::$ENV = $env;
 		}
-
-		switch($env)
-		{
-			case $modes['d']:
-				ini_set('display_errors', 'on');
-				error_reporting(E_ALL);
-				break;
-
-			case $modes['p']:
-				ini_set('display_errors', 'off');
-				error_reporting(0);
-				break;
-		}
-
-		self::$ENV = $env;
 	}
 
 	/**
@@ -116,10 +111,9 @@ class Creation
 				$callback = $callbackFromArray;
 		}
 
-		if(!is_callable($callback))
-			return Failure\Message::show('Your before() method call returns an failure. Check your syntax.', 1002);
+		if(is_callable($callback))
+			Store\Before::set($callback);
 
-		Store\Before::set($callback);
 		return $this;
 	}
 
@@ -143,10 +137,9 @@ class Creation
 				$callback = $callbackFromArray;
 		}
 
-		if(!is_callable($callback))
-			return Failure\Message::show('Your after() method call returns an failure. Check your syntax.', 1003);
+		if(is_callable($callback))
+			Store\After::set($callback);
 
-		Store\After::set($callback);
 		return $this;
 	}
 
@@ -179,14 +172,12 @@ class Creation
 					$callback = $callbackFromArray;
 			}
 
-			if(gettype($name) !== 'string' || !is_callable($callback))
-				return Failure\Message::show('Your when() method call returns an failure. Check your syntax.', 1004);
-
-			Store\Listeners::add(
-					new Event\Listener(
-							$name, $callback
-						)
-				);
+			if(gettype($name) === 'string' && is_callable($callback))
+				Store\Listeners::add(
+						new Event\Listener(
+								$name, $callback
+							)
+					);
 		}
 
 		return $this;
@@ -228,34 +219,25 @@ class Creation
 							$callback = $callbackFromArray;
 					}
 
-					if(gettype($path) !== 'string' || !is_callable($callback))
+					if(gettype($path) === 'string' && is_callable($callback))
 					{
-						if($bySimpleMethod)
-							return Failure\Message::show('Your '. strtolower($method) .'() method call returns an failure. Check your syntax.', 1005, [
-									'method' => $method
-								]);
-						else
-							return Failure\Message::show('Your routes() method call returns an failure. Check your syntax.', 1006, [
-									'methods' => $httpMethods
-								]);
+						if($path[0] !== '/')
+							$path = '/' . $path;
+
+						if($group !== false && gettype($group) === 'string')
+						{
+							if($group[0] !== '/')
+								$group = '/' . $group;
+
+							$path = $group . $path;
+						}
+
+						Store\Routes::add(
+							new Router\Route(
+									$method, $path, $callback
+								)
+							);
 					}
-
-					if($path[0] !== '/')
-						$path = '/' . $path;
-
-					if($group !== false && gettype($group) === 'string')
-					{
-						if($group[0] !== '/')
-							$group = '/' . $group;
-
-						$path = $group . $path;
-					}
-
-					Store\Routes::add(
-						new Router\Route(
-								$method, $path, $callback
-							)
-						);
 				}
 			}
 		}
@@ -304,9 +286,7 @@ class Creation
 		if(Execution\Runner::executed())
 			return false;
 
-		if(!Failure\Message::has())
-			Execution\Runner::start();
-
+		Execution\Runner::start();
 		return true;
 	}
 

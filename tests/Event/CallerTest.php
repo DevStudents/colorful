@@ -4,6 +4,7 @@ use PHPUnit\Framework\TestCase;
 use sintloer\COLORFUL\Event\Caller;
 use sintloer\COLORFUL\Http\Request;
 use sintloer\COLORFUL\Http\Response;
+use sintloer\COLORFUL\Execution\Context;
 
 class CallerTest extends TestCase
 {
@@ -16,11 +17,13 @@ class CallerTest extends TestCase
 
     public function testValidInit()
     {
+        $request = new Request();
         $init = Caller::init([
             'aaaa' => function() {
                 return 100;
             }
-        ], [ new Request(), new Response() ]);
+        ], [ $request, new Response(), new Context($request) ]);
+
         $this->assertNull($init);
     }
 

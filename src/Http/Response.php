@@ -26,24 +26,31 @@ class Response
 	}
 
 	/**
-	 * Set HTTP response headers.
+	 * Set HTTP response header.
 	 * @param string $name
-	 * @param mixed $value
-	 * @return mixed
+	 * @param string $value
 	 *
 	 */
 
-	public function headers($name, $value = null)
+	public function header($name, $value)
 	{
-		if(is_array($name))
+		if(is_string($name) && is_string($value))
+			@header($name . ': ' . $value);
+	}
+
+	/**
+	 * Set HTTP response headers.
+	 * @param array $name
+	 *
+	 */
+
+	public function headers($data)
+	{
+		if(is_array($data))
 		{
-			foreach($name as $key => $value)
+			foreach($data as $key => $value)
 				@header($key . ': ' . $value);
-
-			return;
 		}
-
-		@header($name . ': ' . $value);
 	}
 
 	/**

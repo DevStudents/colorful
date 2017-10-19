@@ -66,7 +66,7 @@ class Response
 		if($code !== null)
 			$this->code($code);
 
-		$this->headers('Content-Type', $type);
+		$this->header('Content-Type', $type);
 		echo json_encode($data);
 	}
 
@@ -92,7 +92,7 @@ class Response
 	public function redirect($url, $code = 303)
 	{
 		$this->code($code);
-		$this->headers('Location', $url);
+		$this->header('Location', $url);
 		exit();
 	}
 

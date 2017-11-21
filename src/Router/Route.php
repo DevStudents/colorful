@@ -2,7 +2,7 @@
 
 /**
  * COLORFULframework
- * @author sintloer <me@sintloer.com>
+ * @author sintloer <contact@sintloer.com>
  * @license MIT
  * 
  */

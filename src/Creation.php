@@ -2,7 +2,7 @@
 
 /**
  * COLORFULframework
- * @author sintloer <me@sintloer.com>
+ * @author sintloer <contact@sintloer.com>
  * @license MIT
  *
  */
@@ -24,7 +24,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.3.4';
+	const VERSION = '0.3.5';
 
 	/**
 	 * Environment modes.

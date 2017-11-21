@@ -24,7 +24,7 @@ class Creation
 	 *
 	 */
 
-	const VERSION = '0.3.3';
+	const VERSION = '0.3.4';
 
 	/**
 	 * Environment modes.
